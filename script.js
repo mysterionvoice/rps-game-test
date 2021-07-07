@@ -4,7 +4,7 @@ function computerPlay() {
 }
 
 function getPlayerSelection() {
-    return choice = prompt('Choose Wisely')
+    return choice = prompt('Choose Rock, Paper, or Scissors').toUpperCase();
 }
 
 function playRound() {
@@ -17,20 +17,33 @@ function playRound() {
                (playerSelection == 'PAPER' && computerSelection == 'SCISSORS') ||
                (playerSelection == 'SCISSORS' && computerSelection == 'ROCK')) {
         result = 'LOSE';
+        computerPoints = ++computerPoints;
     } else {
         result = 'WIN'
+        playerPoints = ++playerPoints
     }
     return result;
-}
-/*Will finish below when adding GUI*/
-function game() {
-    for (round = 0; computerPoints < 5 && playerPoints < 5; round) {
-        playerSelection = getPlayerSelection();
-        computerSelection = computerPlay();
-        playRound();
-        updateScore();
-      }
 }
 
 let playerPoints = 0;
 let computerPoints = 0;
+
+function game() {
+    for (let round = 0; computerPoints < 5 && playerPoints < 5; round++) {
+        playRound();
+        console.log(playerPoints)
+        console.log(computerPoints)
+    }
+}
+
+function endGame() {
+    let outcome;
+    if (playerPoints = 5) {
+        outcome = 'WINNER!'
+    } else if (computerPoints = 5) {
+        outcome = 'GAME OVER!'
+    } else {
+        outcome = 'CONTINUE'
+    }
+    return outcome
+}
