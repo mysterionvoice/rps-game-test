@@ -1,13 +1,10 @@
-let playerPoints = 0;
-let computerPoints = 0;
-
 function computerPlay() {
     let options = ['ROCK', 'PAPER', 'SCISSORS'];
     return options[Math.floor(Math.random()*(options.length))];
 }
 
 function getPlayerSelection() {
-    return choice = prompt('Choose Your Weapon')
+    return choice = prompt('Choose Wisely')
 }
 
 function playRound() {
@@ -35,3 +32,5 @@ function game() {
       }
 }
 
+let playerPoints = 0;
+let computerPoints = 0;
