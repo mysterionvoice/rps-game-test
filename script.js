@@ -22,7 +22,7 @@ function playRound() {
     }
     return result;
 }
-
+/*Will finish below when adding GUI*/
 function game() {
     for (round = 0; computerPoints < 5 && playerPoints < 5; round) {
         playerSelection = getPlayerSelection();
