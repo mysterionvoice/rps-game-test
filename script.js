@@ -1,49 +1,56 @@
-function computerPlay() {
-    let options = ['ROCK', 'PAPER', 'SCISSORS'];
-    return options[Math.floor(Math.random()*(options.length))];
-}
+let playerScore = 0
+let computerScore = 0
+const buttons = document.querySelectorAll('button')
+buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+        playRound(button.id)
+    })
+})
 
-function getPlayerSelection() {
-    return choice = prompt('Choose Rock, Paper, or Scissors').toUpperCase();
-}
-
-function playRound() {
-    let playerSelection = getPlayerSelection();
-    let computerSelection = computerPlay();
+function playRound(playerSelection) {
+    let computerSelection = computerPlay()
     let result;
-    if (playerSelection == computerSelection) {
-        result = 'DRAW';
-    } else if ((playerSelection == 'ROCK' && computerSelection == 'PAPER') ||
-               (playerSelection == 'PAPER' && computerSelection == 'SCISSORS') ||
-               (playerSelection == 'SCISSORS' && computerSelection == 'ROCK')) {
-        result = 'LOSE';
-        computerPoints = ++computerPoints;
+
+    if ((playerSelection == 'ROCK' && computerSelection == 'SCISSORS') ||
+        (playerSelection == 'PAPER' && computerSelection == 'ROCK') ||
+        (playerSelection == 'SCISSORS' && computerSelection == 'PAPER') ||
+        (playerSelection == 'LIZARD' && computerSelection == 'PAPER') ||
+        (playerSelection == 'SPOCK' && computerSelection == 'ROCK') ||
+        (playerSelection == 'ROCK' && computerSelection == 'LIZARD') ||
+        (playerSelection == 'PAPER' && computerSelection == 'SPOCK') ||
+        (playerSelection == 'SCISSORS' && computerSelection == 'LIZARD') ||
+        (playerSelection == 'LIZARD' && computerSelection == 'SPOCK') ||
+        (playerSelection == 'SPOCK' && computerSelection == 'SCISSORS')) {
+            
+        ++playerScore
+        result = (playerSelection + ' beats ' + computerSelection + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore)
+        
+            if (playerScore == 5) {
+                result += '<br><br>WINNER!'
+                disableButtons()
+        }
+    } else if (playerSelection == computerSelection) {
+        result = ('DRAW' + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore) 
     } else {
-        result = 'WIN'
-        playerPoints = ++playerPoints
+        ++computerScore
+        result = (playerSelection +' loses to ' + computerSelection + "<br><br>Player score: " + playerScore + "<br>Computer score: " + computerScore)
+
+            if (computerScore == 5) {
+                result += '<br><br>GAME OVER!'
+                disableButtons()
+        }
     }
-    return result;
+    document.getElementById('scorebox').innerHTML = result
+    return
 }
 
-let playerPoints = 0;
-let computerPoints = 0;
-
-function game() {
-    for (let round = 0; computerPoints < 5 && playerPoints < 5; round++) {
-        playRound();
-        console.log(playerPoints)
-        console.log(computerPoints)
-    }
+function computerPlay() {
+    let choices = ['ROCK', 'PAPER', 'SCISSORS', 'LIZARD', 'SPOCK']
+    return choices[Math.floor(Math.random() * choices.length)]
 }
 
-function endGame() {
-    let outcome;
-    if (playerPoints = 5) {
-        outcome = 'WINNER!'
-    } else if (computerPoints = 5) {
-        outcome = 'GAME OVER!'
-    } else {
-        outcome = 'CONTINUE'
-    }
-    return outcome
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })
 }
